@@ -13,27 +13,26 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Why Choose Pison Careers?</h2>
-            <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
+    <section className="py-32 bg-background border-t border-border">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-24 animate-fade-in">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Why Choose Pison Careers?</h2>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
             {reasons.map((reason, index) => (
               <div 
                 key={index}
-                className="flex items-start space-x-4 p-4 rounded-lg hover:bg-secondary/50 transition-smooth"
+                className="flex items-start space-x-4 glass-card p-6 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className="flex-shrink-0">
-                  <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
-                    <Check className="w-4 h-4 text-accent-foreground" />
+                <div className="flex-shrink-0 mt-1">
+                  <div className="w-5 h-5 rounded-full border-2 border-accent flex items-center justify-center">
+                    <Check className="w-3 h-3 text-accent" strokeWidth={3} />
                   </div>
                 </div>
-                <p className="text-lg font-medium text-foreground">{reason}</p>
+                <p className="text-base font-light text-foreground">{reason}</p>
               </div>
             ))}
           </div>

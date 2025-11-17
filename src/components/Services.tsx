@@ -31,40 +31,36 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-secondary/20 to-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-20 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
-            Our Services: Your Competitive Advantage
+    <section className="py-32 bg-background border-t border-border">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="mb-24 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+            Our Services
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-gold mx-auto rounded-full" />
-          <p className="text-muted-foreground mt-6 max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl text-xl font-light">
             Expert solutions tailored to elevate your career journey
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
           {services.map((service, index) => (
             <Card 
               key={index}
-              className="group relative p-8 lg:p-10 border-border/50 hover:border-accent/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm overflow-hidden"
+              className="group relative p-10 border-border hover:border-accent/30 transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:to-accent/10 transition-all duration-500" />
-              
               <div className="relative z-10">
-                <div className="inline-flex p-5 rounded-2xl bg-accent/10 mb-6 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
-                  <service.icon className="w-10 h-10 text-accent" />
+                <div className="inline-flex mb-6">
+                  <service.icon className="w-8 h-8 text-muted-foreground group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-semibold mb-4 text-card-foreground group-hover:text-accent transition-colors">
+                <h3 className="text-xl font-semibold mb-4 text-foreground tracking-tight">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                <p className="text-muted-foreground leading-relaxed font-light">{service.description}</p>
               </div>
               
               {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </Card>
           ))}
         </div>
