@@ -30,47 +30,35 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
-            How It Works – From Dream to Delivery
+    <section className="py-32 bg-background border-t border-border">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="mb-24 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+            How It Works
           </h2>
-          <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
+          <p className="text-xl text-muted-foreground font-light">
+            From Dream to Delivery
+          </p>
         </div>
         
         <div className="max-w-5xl mx-auto">
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-accent/30 transform -translate-x-1/2" />
-            
+          <div className="grid md:grid-cols-5 gap-4">
             {steps.map((step, index) => (
               <div 
                 key={index}
-                className={`relative flex items-center mb-16 last:mb-0 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
+                className="glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Content */}
-                <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
-                  <div className="bg-card p-6 rounded-xl border border-border shadow-md hover:shadow-lg transition-smooth">
-                    <div className={`flex items-center mb-4 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                      <step.icon className="w-8 h-8 text-accent" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2 text-card-foreground">{step.title}</h3>
-                    <p className="text-muted-foreground">{step.description}</p>
+                <div className="mb-6">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 mb-4">
+                    <step.icon className="w-6 h-6 text-accent" strokeWidth={1.5} />
+                  </div>
+                  <div className="text-4xl font-bold text-muted-foreground/20">
+                    0{index + 1}
                   </div>
                 </div>
-                
-                {/* Circle indicator */}
-                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-accent rounded-full items-center justify-center shadow-gold z-10">
-                  <span className="text-accent-foreground font-bold text-lg">{index + 1}</span>
-                </div>
-                
-                {/* Mobile number */}
-                <div className="md:hidden absolute -left-12 top-6 w-10 h-10 bg-accent rounded-full flex items-center justify-center shadow-gold">
-                  <span className="text-accent-foreground font-bold">{index + 1}</span>
-                </div>
+                <h3 className="text-base font-semibold mb-2 text-foreground tracking-tight">{step.title}</h3>
+                <p className="text-sm text-muted-foreground font-light leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>

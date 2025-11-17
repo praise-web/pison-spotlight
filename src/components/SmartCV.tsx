@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, Link2, QrCode, Shield, Clock } from "lucide-react";
+import { Check, Link2, QrCode, Shield, Clock, FileCheck } from "lucide-react";
 
 const features = [
   {
@@ -31,61 +31,54 @@ const features = [
 
 const SmartCV = () => {
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/90" />
-      <div className="absolute inset-0 gradient-mesh opacity-20" />
+    <section className="relative py-32 overflow-hidden bg-background border-t border-border">
+      {/* Subtle gradient mesh */}
+      <div className="absolute inset-0 z-0 gradient-mesh opacity-100" />
       
-      {/* Decorative circles */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      {/* Floating decorative elements */}
+      <div className="absolute top-20 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float" />
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20 text-white">
-            <div className="inline-block mb-6 px-6 py-2 glass-card rounded-full">
-              <p className="text-sm font-medium text-accent">Featured Product</p>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
-              Step Into the Limelight with the
-              <br />
-              <span className="text-gradient">Pison Smart CV</span>
-            </h2>
-            
-            <p className="text-lg md:text-xl leading-relaxed text-gray-200 max-w-4xl mx-auto">
-              This is not just a CV — it's a smart, interactive, and verifiable career tool. Logos of every institution 
-              are clickable and lead to their official websites for instant trust. All contact details are hyperlinked. 
-              And your QR code gives employers access to your certificates, recommendations, portfolios, and video 
-              introductions — securely and professionally.
-            </p>
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="mb-16 animate-fade-in">
+          <div className="inline-block mb-6 px-6 py-2.5 glass-card rounded-full border border-border">
+            <p className="text-sm font-medium text-muted-foreground">Our Premium Product</p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                className="glass-card p-8 rounded-2xl hover:bg-white/15 transition-all duration-500 hover:scale-105 hover:shadow-2xl group"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="inline-flex p-4 rounded-xl bg-accent/20 mb-6 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-8 h-8 text-accent" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center">
-            <Button 
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-12 py-7 text-lg shadow-gold transition-all hover:scale-105 hover:shadow-2xl group"
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight max-w-4xl">
+            Step Into the Limelight with the <span className="text-accent">Pison Smart CV</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl font-light leading-relaxed">
+            This is not just a CV — it's a smart, interactive, and verifiable career tool. Logos of every institution are clickable and lead to their official websites for instant trust. All contact details are hyperlinked. And your QR code gives employers access to your certificates, recommendations, portfolios, and video introductions — securely and professionally.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="group glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              Order Your Smart CV Now
-              <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
-            </Button>
-          </div>
+              <div className="inline-flex mb-5">
+                <feature.icon className="w-7 h-7 text-muted-foreground group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-base font-medium mb-2 text-foreground tracking-tight">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+        
+        <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <Button 
+            size="lg" 
+            className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-10 py-7 text-base transition-all rounded-full border-2 border-accent"
+          >
+            <FileCheck className="mr-2 h-5 w-5" />
+            Order Your Smart CV Now
+          </Button>
         </div>
       </div>
     </section>
