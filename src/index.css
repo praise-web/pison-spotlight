@@ -47,17 +47,27 @@ All colors MUST be HSL.
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 15%) 0%, hsl(210, 90%, 25%) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(43, 100%, 52%) 0%, hsl(38, 100%, 60%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(210, 100%, 15%) 0%, hsl(210, 80%, 20%) 50%, hsl(210, 60%, 30%) 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(0, 31, 77, 0.95) 0%, rgba(0, 50, 100, 0.9) 50%, rgba(0, 60, 120, 0.85) 100%);
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(210, 100%, 15%) 0px, transparent 50%),
+                     radial-gradient(at 100% 0%, hsl(210, 90%, 25%) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(43, 100%, 52%) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(210, 100%, 15%) 0px, transparent 50%);
     
     /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 31, 77, 0.08);
-    --shadow-md: 0 4px 16px rgba(0, 31, 77, 0.12);
-    --shadow-lg: 0 8px 32px rgba(0, 31, 77, 0.16);
-    --shadow-gold: 0 4px 20px rgba(255, 186, 8, 0.3);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --shadow-gold: 0 10px 30px -5px rgba(255, 186, 8, 0.4);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Glass effect */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
 
     --sidebar-background: 0 0% 98%;
 
@@ -136,6 +146,10 @@ All colors MUST be HSL.
     background: var(--gradient-hero);
   }
   
+  .gradient-mesh {
+    background: var(--gradient-mesh);
+  }
+  
   .shadow-gold {
     box-shadow: var(--shadow-gold);
   }
@@ -146,5 +160,18 @@ All colors MUST be HSL.
   
   .transition-bounce {
     transition: var(--transition-bounce);
+  }
+  
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

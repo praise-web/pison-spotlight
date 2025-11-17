@@ -31,25 +31,40 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-20 bg-secondary/30">
+    <section className="py-24 bg-gradient-to-b from-secondary/20 to-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-20 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
             Our Services: Your Competitive Advantage
           </h2>
-          <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
+          <div className="w-24 h-1.5 bg-gradient-gold mx-auto rounded-full" />
+          <p className="text-muted-foreground mt-6 max-w-2xl mx-auto text-lg">
+            Expert solutions tailored to elevate your career journey
+          </p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
             <Card 
               key={index}
-              className="p-8 border-border hover:shadow-lg transition-smooth hover:-translate-y-2 bg-card group"
+              className="group relative p-8 lg:p-10 border-border/50 hover:border-accent/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <service.icon className="w-12 h-12 text-accent mb-4 group-hover:scale-110 transition-smooth" />
-              <h3 className="text-xl font-semibold mb-3 text-card-foreground">{service.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:to-accent/10 transition-all duration-500" />
+              
+              <div className="relative z-10">
+                <div className="inline-flex p-5 rounded-2xl bg-accent/10 mb-6 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
+                  <service.icon className="w-10 h-10 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-card-foreground group-hover:text-accent transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              </div>
+              
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
             </Card>
           ))}
         </div>
