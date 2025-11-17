@@ -31,36 +31,36 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-32 md:py-40 bg-background border-t border-border">
+    <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 md:mb-32 animate-fade-in text-center">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight">
-            Our <span className="text-accent">Services</span>
+        <div className="mb-24 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+            Our Services
           </h2>
-          <p className="text-muted-foreground max-w-3xl mx-auto text-xl md:text-2xl font-light">
+          <p className="text-muted-foreground max-w-2xl text-xl font-light">
             Expert solutions tailored to elevate your career journey
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
           {services.map((service, index) => (
             <Card 
               key={index}
-              className="group relative p-12 border-border hover:border-accent/40 transition-all duration-500 bg-card/80 backdrop-blur-sm overflow-hidden rounded-2xl"
+              className="group relative p-10 border-border hover:border-accent/30 transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative z-10">
-                <div className="inline-flex mb-8">
-                  <service.icon className="w-10 h-10 text-muted-foreground group-hover:text-accent transition-colors duration-500" strokeWidth={1.5} />
+                <div className="inline-flex mb-6">
+                  <service.icon className="w-8 h-8 text-muted-foreground group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-2xl font-bold mb-5 text-foreground tracking-tight">
+                <h3 className="text-xl font-semibold mb-4 text-foreground tracking-tight">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-lg font-light">{service.description}</p>
+                <p className="text-muted-foreground leading-relaxed font-light">{service.description}</p>
               </div>
               
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </Card>
           ))}
         </div>

@@ -15,35 +15,35 @@ const capabilities = [
 
 const Capabilities = () => {
   return (
-    <section className="py-32 md:py-40 bg-background border-t border-border">
+    <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 md:mb-32 animate-fade-in text-center">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-            What We <span className="text-accent">Do for You</span>
+        <div className="mb-24 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+            What We Do for You
           </h2>
         </div>
         
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 max-w-7xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {capabilities.map((capability, index) => (
             <div 
               key={index}
-              className="group glass-card p-10 rounded-2xl border border-border hover:border-accent/40 transition-all duration-500"
+              className="group glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <div className="inline-flex mb-7">
-                <capability.icon className="w-9 h-9 text-muted-foreground group-hover:text-accent transition-colors duration-500" strokeWidth={1.5} />
+              <div className="inline-flex mb-5">
+                <capability.icon className="w-7 h-7 text-muted-foreground group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
               </div>
-              <h3 className="text-lg font-bold text-foreground">
+              <h3 className="text-base font-medium text-foreground">
                 {capability.title}
               </h3>
             </div>
           ))}
         </div>
         
-        <div className="animate-fade-in text-center" style={{ animationDelay: '0.3s' }}>
+        <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <Button 
             size="lg" 
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-12 py-8 text-lg rounded-full transition-all shadow-gold border-0"
+            className="bg-foreground hover:bg-foreground/90 text-background font-medium px-10 py-7 text-base rounded-full border-2 border-foreground transition-all"
           >
             Get Started Now
           </Button>

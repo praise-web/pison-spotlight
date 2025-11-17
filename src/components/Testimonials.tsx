@@ -20,37 +20,37 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-32 md:py-40 bg-background border-t border-border">
+    <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 md:mb-32 animate-fade-in text-center">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-            People <span className="text-accent">Talk About</span> Pison Careers
+        <div className="mb-24 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+            People Talk About Pison Careers
           </h2>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-7xl">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
-              className="group glass-card p-12 rounded-2xl border border-border hover:border-accent/40 transition-all duration-500"
+              className="group glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="mb-10">
-                <Quote className="w-12 h-12 text-accent/20" strokeWidth={1.5} />
+              <div className="mb-8">
+                <Quote className="w-10 h-10 text-accent/30" strokeWidth={1.5} />
               </div>
               
-              <p className="text-lg text-muted-foreground mb-10 leading-relaxed font-light italic">
+              <p className="text-base text-muted-foreground mb-8 leading-relaxed font-light italic">
                 "{testimonial.quote}"
               </p>
               
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center border-2 border-accent/20">
-                  <span className="text-accent font-bold text-xl">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20">
+                  <span className="text-accent font-semibold text-lg">
                     {testimonial.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
                 <div>
-                  <p className="font-bold text-foreground text-lg">{testimonial.name}</p>
+                  <p className="font-semibold text-foreground">{testimonial.name}</p>
                   <p className="text-sm text-muted-foreground font-light">{testimonial.role}</p>
                 </div>
               </div>
