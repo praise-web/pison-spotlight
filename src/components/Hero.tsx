@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Mail } from "lucide-react";
-import hiringGif from "@/assets/hiring_pt_2.gif";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 
 const Hero = () => {
@@ -52,12 +52,13 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Side - GIF */}
+          {/* Right Side - Lottie Animation */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <div className="relative w-full max-w-md lg:max-w-lg">
-              <img 
-                src={hiringGif} 
-                alt="Hiring Process Illustration" 
+              <DotLottieReact
+                src="https://lottie.host/81a2a9e0-0516-4cc5-9e49-694b6224dd86/SLCEy57Zb7.lottie"
+                loop
+                autoplay
                 className="w-full h-auto drop-shadow-2xl"
               />
             </div>
