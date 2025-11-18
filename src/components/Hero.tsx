@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Mail } from "lucide-react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { useNavigate } from "react-router-dom";
 
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Shape blur gradient background */}
@@ -37,6 +40,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 className="bg-foreground hover:bg-foreground/90 text-background font-medium px-10 py-7 text-base transition-all rounded-full group border-2 border-foreground"
+                onClick={() => navigate('/order')}
               >
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Place Your Order
@@ -54,7 +58,7 @@ const Hero = () => {
 
           {/* Right Side - Lottie Animation */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="relative w-full max-w-md lg:max-w-lg">
+            <div className="relative w-full max-w-lg lg:max-w-2xl">
               <DotLottieReact
                 src="https://lottie.host/81a2a9e0-0516-4cc5-9e49-694b6224dd86/SLCEy57Zb7.lottie"
                 loop
