@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Progress } from "@/components/ui/progress";
 import { ChevronLeft, ChevronRight, Shield, CheckCircle, Clock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 
 const formSchema = z.object({
@@ -43,6 +44,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const OrderSmartCV = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
 
@@ -59,9 +61,12 @@ const OrderSmartCV = () => {
     console.log("Form submitted:", data);
     toast({
       title: "Order Submitted Successfully! 🎉",
-      description: "Thank you! We'll send you a confirmation email shortly with next steps.",
+      description: "Redirecting you to confirmation page...",
     });
     // Here you would send data to backend/email
+    setTimeout(() => {
+      navigate("/thank-you");
+    }, 1500);
   };
 
   const nextStep = async () => {
