@@ -59,14 +59,54 @@ const OrderSmartCV = () => {
 
   const onSubmit = async (data: FormValues) => {
     console.log("Form submitted:", data);
-    toast({
-      title: "Order Submitted Successfully! 🎉",
-      description: "Redirecting you to confirmation page...",
-    });
-    // Here you would send data to backend/email
-    setTimeout(() => {
-      navigate("/thank-you");
-    }, 1500);
+    
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          phoneNumber: data.phone,
+          email: data.email,
+          linkedinProfile: data.linkedinUrl,
+          currentJobTitle: data.jobStatus,
+          numberOfRoles: data.numberOfRoles,
+          cvType: data.cvType,
+          extras: data.extras || [],
+          cvFileUrl: undefined, // File upload to be implemented
+          verificationHosting: data.hostingOption,
+          additionalDocsUrls: [], // File upload to be implemented
+          paymentOption: data.paymentOption,
+          rushDelivery: data.rushDelivery || false,
+          discountCode: data.discountCode,
+          specialInstructions: data.specialInstructions,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to submit order');
+      }
+
+      toast({
+        title: "Order Submitted! 🎉",
+        description: "Check your email for confirmation.",
+      });
+      
+      setTimeout(() => {
+        navigate("/thank-you");
+      }, 1500);
+    } catch (error) {
+      console.error('Order submission error:', error);
+      toast({
+        title: "Submission Failed",
+        description: error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const nextStep = async () => {

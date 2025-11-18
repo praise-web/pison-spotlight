@@ -14,7 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          additional_docs_urls: string[] | null
+          created_at: string
+          current_job_title: string | null
+          cv_file_url: string | null
+          cv_type: string
+          discount_code: string | null
+          email: string
+          extras: string[] | null
+          full_name: string
+          id: string
+          linkedin_profile: string | null
+          number_of_roles: number | null
+          payment_option: string
+          phone_number: string
+          rush_delivery: boolean | null
+          special_instructions: string | null
+          status: string | null
+          updated_at: string
+          verification_hosting: string
+        }
+        Insert: {
+          additional_docs_urls?: string[] | null
+          created_at?: string
+          current_job_title?: string | null
+          cv_file_url?: string | null
+          cv_type: string
+          discount_code?: string | null
+          email: string
+          extras?: string[] | null
+          full_name: string
+          id?: string
+          linkedin_profile?: string | null
+          number_of_roles?: number | null
+          payment_option: string
+          phone_number: string
+          rush_delivery?: boolean | null
+          special_instructions?: string | null
+          status?: string | null
+          updated_at?: string
+          verification_hosting: string
+        }
+        Update: {
+          additional_docs_urls?: string[] | null
+          created_at?: string
+          current_job_title?: string | null
+          cv_file_url?: string | null
+          cv_type?: string
+          discount_code?: string | null
+          email?: string
+          extras?: string[] | null
+          full_name?: string
+          id?: string
+          linkedin_profile?: string | null
+          number_of_roles?: number | null
+          payment_option?: string
+          phone_number?: string
+          rush_delivery?: boolean | null
+          special_instructions?: string | null
+          status?: string | null
+          updated_at?: string
+          verification_hosting?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
