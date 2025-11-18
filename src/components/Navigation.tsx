@@ -2,9 +2,11 @@ import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border">
@@ -30,7 +32,11 @@ const Navigation = () => {
             >
               Smart CV
             </NavLink>
-            <Button size="sm" className="bg-foreground text-background hover:bg-foreground/90">
+            <Button 
+              size="sm" 
+              className="bg-foreground text-background hover:bg-foreground/90"
+              onClick={() => navigate('/order')}
+            >
               Get Started
             </Button>
           </div>
@@ -64,7 +70,14 @@ const Navigation = () => {
               >
                 Smart CV
               </NavLink>
-              <Button size="sm" className="bg-foreground text-background hover:bg-foreground/90 w-full">
+              <Button 
+                size="sm" 
+                className="bg-foreground text-background hover:bg-foreground/90 w-full"
+                onClick={() => {
+                  navigate('/order');
+                  setIsOpen(false);
+                }}
+              >
                 Get Started
               </Button>
             </div>
