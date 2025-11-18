@@ -1,3 +1,4 @@
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
 import SmartCV from "@/components/SmartCV";
@@ -12,6 +13,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <Navigation />
       <Hero />
       <Capabilities />
       <SmartCV />
