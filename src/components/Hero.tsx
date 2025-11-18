@@ -48,9 +48,9 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 font-medium px-10 py-7 text-base transition-all rounded-full group"
+                className="border-gold/30 hover:bg-gold hover:text-background hover:border-gold font-medium px-10 py-7 text-base transition-all rounded-full group"
               >
-                <MessageCircle className="mr-2 h-5 w-5 text-gold group-hover:scale-110 transition-transform" />
+                <MessageCircle className="mr-2 h-5 w-5 text-gold group-hover:text-background group-hover:scale-110 transition-transform" />
                 Chat on WhatsApp
               </Button>
             </div>
@@ -58,12 +58,12 @@ const Hero = () => {
 
           {/* Right Side - Lottie Animation */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="relative w-full max-w-xl lg:max-w-3xl">
+            <div className="relative w-full max-w-xl lg:max-w-3xl h-[500px] lg:h-[700px]">
               <DotLottieReact
                 src="https://lottie.host/81a2a9e0-0516-4cc5-9e49-694b6224dd86/SLCEy57Zb7.lottie"
                 loop
                 autoplay
-                className="w-full h-auto drop-shadow-2xl"
+                className="w-full h-full drop-shadow-2xl"
               />
             </div>
           </div>
