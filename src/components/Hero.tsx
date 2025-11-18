@@ -27,7 +27,7 @@ const Hero = () => {
             </div>
             
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] animate-fade-in tracking-tight">
-              Welcome to Pison Careers
+              Welcome to<br />Pison Careers
             </h1>
             
             <p className="text-xl md:text-2xl mb-12 text-muted-foreground leading-relaxed animate-fade-in font-light" style={{ animationDelay: '0.2s' }}>
@@ -58,7 +58,7 @@ const Hero = () => {
 
           {/* Right Side - Lottie Animation */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="relative w-full max-w-lg lg:max-w-2xl">
+            <div className="relative w-full max-w-xl lg:max-w-3xl">
               <DotLottieReact
                 src="https://lottie.host/81a2a9e0-0516-4cc5-9e49-694b6224dd86/SLCEy57Zb7.lottie"
                 loop
