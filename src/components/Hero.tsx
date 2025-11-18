@@ -6,12 +6,12 @@ import heroImage from "@/assets/hero-professional.jpg";
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
-      {/* Subtle gradient mesh */}
+      {/* Gold gradient mesh */}
       <div className="absolute inset-0 z-0 gradient-mesh opacity-100" />
       
-      {/* Floating decorative elements */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent/3 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      {/* Floating decorative elements with gold */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       
       {/* Content */}
       <div className="container mx-auto px-6 lg:px-12 relative z-20 py-32">
@@ -40,9 +40,10 @@ const Hero = () => {
             </Button>
             <Button 
               size="lg" 
-              className="glass-card hover:bg-muted/50 font-medium px-10 py-7 text-base transition-all rounded-full border border-border"
+              variant="outline"
+              className="border-gold/30 hover:bg-gold/10 hover:border-gold/50 font-medium px-10 py-7 text-base transition-all rounded-full group"
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
+              <MessageCircle className="mr-2 h-5 w-5 text-gold group-hover:scale-110 transition-transform" />
               Chat on WhatsApp
             </Button>
           </div>
