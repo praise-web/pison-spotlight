@@ -6,7 +6,7 @@ const ThankYou = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-background flex items-center justify-center px-6 py-12 animate-fade-in-up">
       {/* Background gradient effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-deep-blue/20 rounded-full blur-3xl" />
