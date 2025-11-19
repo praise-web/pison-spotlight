@@ -1,7 +1,6 @@
 {
   "nodeModulesDir": "auto",
   "imports": {
-    "resend": "npm:resend@2.0.0",
-    "@supabase/realtime-js": "npm:@supabase/realtime-js@2.15.5"
+    "resend": "npm:resend@2.0.0"
   }
 }
