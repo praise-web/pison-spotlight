@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Link2, QrCode, Shield, Clock, FileCheck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -30,6 +31,8 @@ const features = [
 ];
 
 const SmartCV = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="smart-cv" className="relative py-32 overflow-hidden bg-background border-t border-border">
       {/* Subtle gradient mesh */}
@@ -75,6 +78,7 @@ const SmartCV = () => {
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-10 py-7 text-base transition-all rounded-full border-2 border-accent"
+            onClick={() => navigate('/order')}
           >
             <FileCheck className="mr-2 h-5 w-5" />
             Order Your Smart CV Now
