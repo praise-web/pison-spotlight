@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@4.0.0";
+import { Resend } from "resend";
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
@@ -135,7 +135,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to internal team
     const internalEmailResponse = await resend.emails.send({
       from: "Pison Orders <onboarding@resend.dev>",
-      to: ["smartcv@pisoncareers.com"],
+      to: ["opra.temmy@gmail.com"],
       subject: `New Smart CV Order - ${orderData.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

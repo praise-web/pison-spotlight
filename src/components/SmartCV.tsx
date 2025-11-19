@@ -31,7 +31,7 @@ const features = [
 
 const SmartCV = () => {
   return (
-    <section className="relative py-32 overflow-hidden bg-background border-t border-border">
+    <section id="smart-cv" className="relative py-32 overflow-hidden bg-background border-t border-border">
       {/* Subtle gradient mesh */}
       <div className="absolute inset-0 z-0 gradient-mesh opacity-100" />
       
