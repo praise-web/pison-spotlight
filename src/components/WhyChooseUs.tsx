@@ -15,7 +15,7 @@ const WhyChooseUs = () => {
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto animate-fade-in-up">
           <div className="mb-24 animate-fade-in">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Why Choose Pison Careers?</h2>
           </div>

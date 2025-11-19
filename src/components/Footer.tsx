@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Facebook } from "luc
 const Footer = () => {
   return (
     <footer className="bg-background border-t border-border">
-      <div className="container mx-auto px-6 lg:px-12 py-20">
+      <div className="container mx-auto px-6 lg:px-12 py-20 animate-fade-in-up">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           {/* Company Info */}
           <div className="md:col-span-2">

@@ -22,7 +22,7 @@ const Testimonials = () => {
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 animate-fade-in">
+        <div className="mb-24 animate-fade-in-up">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
             People Talk About Pison Careers
           </h2>

@@ -146,7 +146,7 @@ const OrderSmartCV = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="container mx-auto px-6 py-32 max-w-3xl">
+      <div className="container mx-auto px-6 py-32 max-w-3xl animate-fade-in-up">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gold to-gold/60 bg-clip-text text-transparent">
