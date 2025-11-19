@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link2, Phone, QrCode, Award, FolderOpen, Shield, Clock, CheckCircle2, Users } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -51,14 +52,21 @@ const audience = [
 ];
 
 const SmartCVPage = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 z-0 gradient-mesh opacity-100" />
-        <div className="absolute top-20 right-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl animate-float" />
+      <section className="relative pt-32 pb-20 overflow-hidden bg-background">
+        {/* Shape blur gradient background */}
+        <div className="absolute inset-0 z-0 animate-rotate-slow">
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-deep-blue/30 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-gold/20 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 left-1/4 w-[550px] h-[550px] bg-primary/15 rounded-full blur-[110px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-deep-blue/20 rounded-full blur-[90px] animate-float" />
+        </div>
         
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
@@ -76,7 +84,11 @@ const SmartCVPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 px-10 py-7 text-base rounded-full">
+              <Button 
+                size="lg" 
+                className="bg-foreground text-background hover:bg-foreground/90 px-10 py-7 text-base rounded-full"
+                onClick={() => navigate('/order')}
+              >
                 📩 GET STARTED
               </Button>
               <Button size="lg" variant="outline" className="glass-card border-border px-10 py-7 text-base rounded-full hover:border-gold/30">
@@ -198,7 +210,11 @@ const SmartCVPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 px-10 py-7 text-base rounded-full">
+              <Button 
+                size="lg" 
+                className="bg-foreground text-background hover:bg-foreground/90 px-10 py-7 text-base rounded-full"
+                onClick={() => navigate('/order')}
+              >
                 📩 GET STARTED
               </Button>
               <Button size="lg" variant="outline" className="glass-card border-border px-10 py-7 text-base rounded-full hover:border-gold/30">
