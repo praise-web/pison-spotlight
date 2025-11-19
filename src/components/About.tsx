@@ -15,7 +15,7 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300">
+            <div className="glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up">
               <Target className="w-10 h-10 text-muted-foreground mb-6" strokeWidth={1.5} />
               <h3 className="text-2xl font-semibold mb-4 text-foreground tracking-tight">Our Mission</h3>
               <p className="text-muted-foreground leading-relaxed font-light">
@@ -24,7 +24,7 @@ const About = () => {
               </p>
             </div>
             
-            <div className="glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300">
+            <div className="glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               <Heart className="w-10 h-10 text-muted-foreground mb-6" strokeWidth={1.5} />
               <h3 className="text-2xl font-semibold mb-4 text-foreground tracking-tight">Why We Exist</h3>
               <p className="text-muted-foreground leading-relaxed font-light">

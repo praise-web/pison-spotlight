@@ -58,7 +58,7 @@ const SmartCV = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="group glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
+              className="group glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="inline-flex mb-5">

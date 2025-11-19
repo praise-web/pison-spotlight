@@ -32,7 +32,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
-              className="group glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
+              className="group glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="mb-8">

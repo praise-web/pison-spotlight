@@ -46,7 +46,7 @@ const Services = () => {
           {services.map((service, index) => (
             <Card 
               key={index}
-              className="group relative p-10 border-border hover:border-accent/30 transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden"
+              className="group relative p-10 border-border hover:border-accent/30 transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative z-10">
