@@ -1,8 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "resend";
-import { createClient } from 'jsr:@supabase/supabase-js@2';
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 
@@ -88,8 +87,33 @@ const handler = async (req: Request): Promise<Response> => {
       ? '<p><strong>Rush Delivery:</strong> Your order will be prioritized for faster completion.</p>'
       : '';
 
+    // Helper to send emails via Resend HTTP API
+    const sendEmail = async (payload: { from: string; to: string[]; subject: string; html: string }) => {
+      if (!RESEND_API_KEY) {
+        console.error("RESEND_API_KEY is not set");
+        return { error: "Missing RESEND_API_KEY" };
+      }
+
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Error sending email via Resend:", data);
+        return { error: data };
+      }
+
+      return { data };
+    };
+
     // Send confirmation email to customer
-    const customerEmailResponse = await resend.emails.send({
+    const customerEmailResponse = await sendEmail({
       from: "Pison Careers <onboarding@resend.dev>",
       to: [orderData.email],
       subject: "🎉 Order Received - Pison Smart CV",
@@ -133,7 +157,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log('Customer email sent:', customerEmailResponse);
 
     // Send notification email to internal team
-    const internalEmailResponse = await resend.emails.send({
+    const internalEmailResponse = await sendEmail({
       from: "Pison Orders <onboarding@resend.dev>",
       to: ["opra.temmy@gmail.com"],
       subject: `New Smart CV Order - ${orderData.fullName}`,
