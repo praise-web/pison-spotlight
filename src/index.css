@@ -147,46 +147,16 @@ All colors MUST be HSL.
     background-clip: text;
   }
   
-  @keyframes float-random-1 {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(30px, -40px); }
-    50% { transform: translate(-20px, 30px); }
-    75% { transform: translate(40px, 20px); }
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
   
-  @keyframes float-random-2 {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(-35px, 25px); }
-    50% { transform: translate(25px, -30px); }
-    75% { transform: translate(-15px, -35px); }
-  }
-  
-  @keyframes float-random-3 {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(40px, 30px); }
-    66% { transform: translate(-30px, -25px); }
-  }
-  
-  @keyframes float-random-4 {
-    0%, 100% { transform: translate(0, 0); }
-    30% { transform: translate(-25px, 35px); }
-    60% { transform: translate(35px, -20px); }
-    90% { transform: translate(15px, 25px); }
-  }
-  
-  .animate-float-1 {
-    animation: float-random-1 20s ease-in-out infinite;
-  }
-  
-  .animate-float-2 {
-    animation: float-random-2 25s ease-in-out infinite;
-  }
-  
-  .animate-float-3 {
-    animation: float-random-3 30s ease-in-out infinite;
-  }
-  
-  .animate-float-4 {
-    animation: float-random-4 22s ease-in-out infinite;
+  .animate-rotate-slow {
+    animation: rotate 30s linear infinite;
   }
 }
