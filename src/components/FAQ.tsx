@@ -46,7 +46,8 @@ const FAQ = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="glass-card border border-border rounded-lg px-8 hover:border-accent/30 transition-all duration-300"
+                className="glass-card border border-border rounded-lg px-8 hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <AccordionTrigger className="text-left font-medium text-foreground hover:text-accent py-6">
                   {faq.question}

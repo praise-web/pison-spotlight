@@ -112,7 +112,7 @@ const SmartCVPage = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="glass-card p-8 rounded-lg border border-border hover:border-gold/30 transition-all duration-300 group"
+                className="glass-card p-8 rounded-lg border border-border hover:border-gold/30 transition-all duration-300 group animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="inline-flex mb-5">
@@ -135,7 +135,7 @@ const SmartCVPage = () => {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-3">
+              <div key={index} className="flex items-center gap-3 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
                 <benefit.icon className="w-6 h-6 text-gold" strokeWidth={1.5} />
                 <span className="text-lg font-medium">{benefit.text}</span>
               </div>
@@ -181,7 +181,8 @@ const SmartCVPage = () => {
               {audience.map((item, index) => (
                 <div
                   key={index}
-                  className="glass-card p-6 rounded-lg border border-border hover:border-gold/30 transition-all duration-300 text-center"
+                  className="glass-card p-6 rounded-lg border border-border hover:border-gold/30 transition-all duration-300 text-center animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <CheckCircle2 className="w-6 h-6 text-gold mx-auto mb-3" strokeWidth={1.5} />
                   <p className="text-base font-medium">{item}</p>

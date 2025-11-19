@@ -46,7 +46,7 @@ const HowItWorks = () => {
             {steps.map((step, index) => (
               <div 
                 key={index}
-                className="glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
+                className="glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-6">

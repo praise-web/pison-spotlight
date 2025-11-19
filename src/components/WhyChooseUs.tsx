@@ -24,7 +24,7 @@ const WhyChooseUs = () => {
             {reasons.map((reason, index) => (
               <div 
                 key={index}
-                className="flex items-start space-x-4 glass-card p-6 rounded-lg border border-border hover:border-accent/30 transition-all duration-300"
+                className="flex items-start space-x-4 glass-card p-6 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <div className="flex-shrink-0 mt-1">
