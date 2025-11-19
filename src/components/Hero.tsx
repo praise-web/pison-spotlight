@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Shape blur gradient background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 animate-rotate-slow">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-deep-blue/30 rounded-full blur-[120px]" />
         <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-gold/20 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 left-1/4 w-[550px] h-[550px] bg-primary/15 rounded-full blur-[110px]" />
@@ -26,7 +26,7 @@ const Hero = () => {
               <p className="text-sm font-medium text-muted-foreground">Premium Career Services</p>
             </div>
             
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] animate-fade-in tracking-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] animate-fade-in tracking-tight">
               Welcome to<br />Pison Careers
             </h1>
             
