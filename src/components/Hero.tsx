@@ -10,11 +10,11 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Shape blur gradient background */}
-      <div className="absolute inset-0 z-0 animate-rotate-slow">
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-deep-blue/30 rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-gold/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-1/4 w-[550px] h-[550px] bg-primary/15 rounded-full blur-[110px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-deep-blue/20 rounded-full blur-[90px] animate-float" />
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-deep-blue/30 rounded-full blur-[120px] animate-float-1" />
+        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-gold/20 rounded-full blur-[100px] animate-float-2" />
+        <div className="absolute bottom-0 left-1/4 w-[550px] h-[550px] bg-primary/15 rounded-full blur-[110px] animate-float-3" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-deep-blue/20 rounded-full blur-[90px] animate-float-4" />
       </div>
       
       {/* Content */}
