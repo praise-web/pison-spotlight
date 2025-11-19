@@ -40,7 +40,10 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 className="bg-foreground hover:bg-foreground/90 text-background font-medium px-10 py-7 text-base transition-all rounded-full group border-2 border-foreground"
-                onClick={() => navigate('/order')}
+                onClick={() => {
+                  const smartCvSection = document.getElementById('smart-cv');
+                  smartCvSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
               >
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Place Your Order
