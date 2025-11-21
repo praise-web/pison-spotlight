@@ -159,7 +159,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to internal team
     const internalEmailResponse = await sendEmail({
       from: "Pison Orders <onboarding@resend.dev>",
-      to: ["opra.temmy@gmail.com"],
+      to: ["admin@praiseoyedele.com.ng"],
       subject: `New Smart CV Order - ${orderData.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
