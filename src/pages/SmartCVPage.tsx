@@ -3,6 +3,7 @@ import { Link2, Phone, QrCode, Award, FolderOpen, Shield, Clock, CheckCircle2, U
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { useNavigate } from "react-router-dom";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const features = [
   {
@@ -53,6 +54,7 @@ const audience = [
 
 const SmartCVPage = () => {
   const navigate = useNavigate();
+  const { ref: heroRef, isVisible: heroVisible } = useIntersectionObserver();
   
   return (
     <div className="min-h-screen">
@@ -69,7 +71,7 @@ const SmartCVPage = () => {
         </div>
         
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
+          <div ref={heroRef} className={`max-w-4xl mx-auto text-center transition-all duration-700 ${heroVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
             <div className="inline-block mb-6 px-6 py-2.5 glass-card rounded-full border border-border">
               <p className="text-sm font-medium text-muted-foreground">The Future of CVs</p>
             </div>
@@ -102,19 +104,22 @@ const SmartCVPage = () => {
       {/* What Makes It Smart Section */}
       <section className="py-32 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="mb-16 text-center animate-fade-in">
+          <div className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
               What Makes It <span className="text-gold">"Smart"?</span>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="glass-card p-8 rounded-lg border border-border hover:border-gold/30 transition-all duration-300 group animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+            {features.map((feature, index) => {
+              const { ref, isVisible } = useIntersectionObserver();
+              return (
+                <div
+                  key={index}
+                  ref={ref}
+                  className={`glass-card p-8 rounded-lg border border-border hover:border-gold/30 transition-all duration-700 group ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                  style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+                >
                 <div className="inline-flex mb-5">
                   <feature.icon className="w-8 h-8 text-gold" strokeWidth={1.5} />
                 </div>
@@ -125,7 +130,8 @@ const SmartCVPage = () => {
                   {feature.description}
                 </p>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -134,12 +140,15 @@ const SmartCVPage = () => {
       <section className="py-16 glass-card border-y border-border">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-3 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+            {benefits.map((benefit, index) => {
+              const { ref, isVisible } = useIntersectionObserver();
+              return (
+                <div key={index} ref={ref} className={`flex items-center gap-3 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}>
                 <benefit.icon className="w-6 h-6 text-gold" strokeWidth={1.5} />
                 <span className="text-lg font-medium">{benefit.text}</span>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -178,16 +187,20 @@ const SmartCVPage = () => {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {audience.map((item, index) => (
-                <div
-                  key={index}
-                  className="glass-card p-6 rounded-lg border border-border hover:border-gold/30 transition-all duration-300 text-center animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
+              {audience.map((item, index) => {
+                const { ref, isVisible } = useIntersectionObserver();
+                return (
+                  <div
+                    key={index}
+                    ref={ref}
+                    className={`glass-card p-6 rounded-lg border border-border hover:border-gold/30 transition-all duration-700 text-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                    style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+                  >
                   <CheckCircle2 className="w-6 h-6 text-gold mx-auto mb-3" strokeWidth={1.5} />
                   <p className="text-base font-medium">{item}</p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

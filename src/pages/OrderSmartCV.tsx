@@ -14,6 +14,7 @@ import { ChevronLeft, ChevronRight, Shield, CheckCircle, Clock } from "lucide-re
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const formSchema = z.object({
   // Section 1: Personal Information
@@ -47,6 +48,11 @@ const OrderSmartCV = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
+  
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  const { ref: progressRef, isVisible: progressVisible } = useIntersectionObserver();
+  const { ref: trustRef, isVisible: trustVisible } = useIntersectionObserver();
+  const { ref: formRef, isVisible: formVisible } = useIntersectionObserver();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -148,7 +154,7 @@ const OrderSmartCV = () => {
       
       <div className="container mx-auto px-6 py-32 max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-12 animate-fade-in-up">
+        <div ref={headerRef} className={`text-center mb-12 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gold to-gold/60 bg-clip-text text-transparent">
             Order Your Smart CV
           </h1>
@@ -158,7 +164,7 @@ const OrderSmartCV = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+        <div ref={progressRef} className={`mb-8 transition-all duration-700 ${progressVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm text-muted-foreground">Step {currentStep} of {totalSteps}</span>
             <span className="text-sm text-muted-foreground">{Math.round(progress)}%</span>
@@ -167,7 +173,7 @@ const OrderSmartCV = () => {
         </div>
 
         {/* Trust Signals */}
-        <div className="flex flex-wrap gap-6 justify-center mb-12 p-6 bg-deep-blue/10 backdrop-blur-sm rounded-lg border border-deep-blue/20 animate-fade-in-up">
+        <div ref={trustRef} className={`flex flex-wrap gap-6 justify-center mb-12 p-6 bg-deep-blue/10 backdrop-blur-sm rounded-lg border border-deep-blue/20 transition-all duration-700 ${trustVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <div className="flex items-center gap-2 text-sm">
             <Shield className="w-5 h-5 text-gold" />
             <span className="text-foreground">100% Secure</span>
@@ -185,10 +191,10 @@ const OrderSmartCV = () => {
         {/* Form */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-8 animate-fade-in-up">
+            <div ref={formRef} className={`bg-card/50 backdrop-blur-sm border border-border rounded-lg p-8 transition-all duration-700 ${formVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
               {/* Step 1: Personal Information */}
               {currentStep === 1 && (
-                <div className="space-y-6 animate-fade-in-up">
+                <div className="space-y-6">
                   <h2 className="text-2xl font-semibold text-foreground mb-6">Personal Information</h2>
                   
                   <FormField

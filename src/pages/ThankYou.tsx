@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, Clock, Mail, Share2, Home, Phone } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const ThankYou = () => {
   const navigate = useNavigate();
+  const { ref: pageRef, isVisible: pageVisible } = useIntersectionObserver();
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-6 py-12 animate-fade-in-up">
+    <div ref={pageRef} className={`min-h-screen bg-background flex items-center justify-center px-6 py-12 transition-all duration-700 ${pageVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
       {/* Background gradient effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-deep-blue/20 rounded-full blur-3xl" />

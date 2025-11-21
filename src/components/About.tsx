@@ -1,11 +1,16 @@
 import { Target, Heart } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const About = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  const { ref: card1Ref, isVisible: card1Visible } = useIntersectionObserver();
+  const { ref: card2Ref, isVisible: card2Visible } = useIntersectionObserver();
+  
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto animate-fade-in-up">
-          <div className="mb-24 animate-fade-in">
+        <div className="max-w-5xl mx-auto">
+          <div ref={headerRef} className={`mb-24 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">About Pison Careers</h2>
             <p className="text-xl text-muted-foreground leading-relaxed font-light max-w-3xl">
               At Pison Careers, we're dedicated to helping job seekers thrive in a competitive world. With expert CV writing, 
@@ -15,7 +20,7 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up">
+            <div ref={card1Ref} className={`glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-700 ${card1Visible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
               <Target className="w-10 h-10 text-muted-foreground mb-6" strokeWidth={1.5} />
               <h3 className="text-2xl font-semibold mb-4 text-foreground tracking-tight">Our Mission</h3>
               <p className="text-muted-foreground leading-relaxed font-light">
@@ -24,7 +29,7 @@ const About = () => {
               </p>
             </div>
             
-            <div className="glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <div ref={card2Ref} className={`glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-700 ${card2Visible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: card2Visible ? '0.1s' : '0s' }}>
               <Heart className="w-10 h-10 text-muted-foreground mb-6" strokeWidth={1.5} />
               <h3 className="text-2xl font-semibold mb-4 text-foreground tracking-tight">Why We Exist</h3>
               <p className="text-muted-foreground leading-relaxed font-light">
