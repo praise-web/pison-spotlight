@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Check, Link2, QrCode, Shield, Clock, FileCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const features = [
   {
@@ -32,6 +33,8 @@ const features = [
 
 const SmartCV = () => {
   const navigate = useNavigate();
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  const { ref: buttonRef, isVisible: buttonVisible } = useIntersectionObserver();
   
   return (
     <section id="smart-cv" className="relative py-32 overflow-hidden bg-background border-t border-border">
@@ -42,7 +45,7 @@ const SmartCV = () => {
       <div className="absolute top-20 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float" />
       
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="mb-16 animate-fade-in-up">
+        <div ref={headerRef} className={`mb-16 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-block mb-6 px-6 py-2.5 glass-card rounded-full border border-border">
             <p className="text-sm font-medium text-muted-foreground">Our Premium Product</p>
           </div>
@@ -55,12 +58,15 @@ const SmartCV = () => {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl">
-          {features.map((feature, index) => (
-            <div 
-              key={index}
-              className="group glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
+          {features.map((feature, index) => {
+            const { ref, isVisible } = useIntersectionObserver();
+            return (
+              <div 
+                key={index}
+                ref={ref}
+                className={`group glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+              >
               <div className="inline-flex mb-5">
                 <feature.icon className="w-7 h-7 text-muted-foreground group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
               </div>
@@ -71,11 +77,12 @@ const SmartCV = () => {
                 {feature.description}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
         
-        <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          <Button 
+        <div ref={buttonRef} className={`transition-all duration-700 ${buttonVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
+          <Button
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-10 py-7 text-base transition-all rounded-full border-2 border-accent"
             onClick={() => navigate('/order')}

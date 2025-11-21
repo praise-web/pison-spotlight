@@ -1,4 +1,5 @@
 import { Search, ShoppingCart, Users, FileCheck, Briefcase } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const steps = [
   {
@@ -29,10 +30,12 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 animate-fade-in-up">
+        <div ref={headerRef} className={`mb-24 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
             How It Works
           </h2>
@@ -43,12 +46,15 @@ const HowItWorks = () => {
         
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-5 gap-4">
-            {steps.map((step, index) => (
-              <div 
-                key={index}
-                className="glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+            {steps.map((step, index) => {
+              const { ref, isVisible } = useIntersectionObserver();
+              return (
+                <div 
+                  key={index}
+                  ref={ref}
+                  className={`glass-card p-8 rounded-lg border border-border hover:border-accent/30 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                  style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+                >
                 <div className="mb-6">
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 mb-4">
                     <step.icon className="w-6 h-6 text-accent" strokeWidth={1.5} />
@@ -60,7 +66,8 @@ const HowItWorks = () => {
                 <h3 className="text-base font-semibold mb-2 text-foreground tracking-tight">{step.title}</h3>
                 <p className="text-sm text-muted-foreground font-light leading-relaxed">{step.description}</p>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

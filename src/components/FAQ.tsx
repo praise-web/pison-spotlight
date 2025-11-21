@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const faqs = [
   {
@@ -33,22 +34,27 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-3xl mx-auto animate-fade-in-up">
-          <div className="mb-24 animate-fade-in">
+        <div className="max-w-3xl mx-auto">
+          <div ref={headerRef} className={`mb-24 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Frequently Asked Questions</h2>
           </div>
           
           <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="glass-card border border-border rounded-lg px-8 hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+            {faqs.map((faq, index) => {
+              const { ref, isVisible } = useIntersectionObserver();
+              return (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  ref={ref}
+                  className={`glass-card border border-border rounded-lg px-8 hover:border-accent/30 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                  style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+                >
                 <AccordionTrigger className="text-left font-medium text-foreground hover:text-accent py-6">
                   {faq.question}
                 </AccordionTrigger>
@@ -56,7 +62,8 @@ const FAQ = () => {
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
-            ))}
+              );
+            })}
           </Accordion>
         </div>
       </div>

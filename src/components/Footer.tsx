@@ -1,12 +1,17 @@
 import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Facebook } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const Footer = () => {
+  const { ref: companyRef, isVisible: companyVisible } = useIntersectionObserver();
+  const { ref: servicesRef, isVisible: servicesVisible } = useIntersectionObserver();
+  const { ref: contactRef, isVisible: contactVisible } = useIntersectionObserver();
+  
   return (
     <footer className="bg-background border-t border-border">
-      <div className="container mx-auto px-6 lg:px-12 py-20 animate-fade-in-up">
+      <div className="container mx-auto px-6 lg:px-12 py-20">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           {/* Company Info */}
-          <div className="md:col-span-2 animate-fade-in-up">
+          <div ref={companyRef} className={`md:col-span-2 transition-all duration-700 ${companyVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
             <h3 className="text-3xl font-bold mb-4 tracking-tight">Pison Careers</h3>
             <p className="text-muted-foreground mb-8 leading-relaxed font-light max-w-md">
               Empowering job seekers and professionals with premium career branding services that get them seen, 
@@ -29,7 +34,7 @@ const Footer = () => {
           </div>
           
           {/* Services */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <div ref={servicesRef} className={`transition-all duration-700 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: servicesVisible ? '0.1s' : '0s' }}>
             <h4 className="text-base font-semibold mb-6 tracking-tight">Our Services</h4>
             <ul className="space-y-3 text-muted-foreground font-light">
               <li><a href="#" className="hover:text-accent transition-colors">Career Coaching</a></li>
@@ -41,7 +46,7 @@ const Footer = () => {
           </div>
           
           {/* Contact */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div ref={contactRef} className={`transition-all duration-700 ${contactVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: contactVisible ? '0.2s' : '0s' }}>
             <h4 className="text-base font-semibold mb-6 tracking-tight">Contact Us</h4>
             <ul className="space-y-4 text-muted-foreground font-light">
               <li className="flex items-start space-x-3">

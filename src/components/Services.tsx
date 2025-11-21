@@ -1,5 +1,6 @@
 import { FileText, Mail, Linkedin, Target, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const services = [
   {
@@ -30,10 +31,12 @@ const services = [
 ];
 
 const Services = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 animate-fade-in-up">
+        <div ref={headerRef} className={`mb-24 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
             Our Services
           </h2>
@@ -43,12 +46,15 @@ const Services = () => {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
-          {services.map((service, index) => (
-            <Card 
-              key={index}
-              className="group relative p-10 border-border hover:border-accent/30 transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
+          {services.map((service, index) => {
+            const { ref, isVisible } = useIntersectionObserver();
+            return (
+              <Card 
+                key={index}
+                ref={ref}
+                className={`group relative p-10 border-border hover:border-accent/30 transition-all duration-700 bg-card/50 backdrop-blur-sm overflow-hidden ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+              >
               <div className="relative z-10">
                 <div className="inline-flex mb-6">
                   <service.icon className="w-8 h-8 text-muted-foreground group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
@@ -62,7 +68,8 @@ const Services = () => {
               {/* Bottom accent line */}
               <div className="absolute bottom-0 left-0 right-0 h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </Card>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

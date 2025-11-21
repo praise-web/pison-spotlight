@@ -1,4 +1,5 @@
 import { Quote } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const testimonials = [
   {
@@ -19,22 +20,27 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver();
+  
   return (
     <section className="py-32 bg-background border-t border-border">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-24 animate-fade-in-up">
+        <div ref={headerRef} className={`mb-24 transition-all duration-700 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
             People Talk About Pison Careers
           </h2>
         </div>
         
         <div className="grid md:grid-cols-3 gap-6 max-w-7xl">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="group glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
+          {testimonials.map((testimonial, index) => {
+            const { ref, isVisible } = useIntersectionObserver();
+            return (
+              <div 
+                key={index}
+                ref={ref}
+                className={`group glass-card p-10 rounded-lg border border-border hover:border-accent/30 transition-all duration-700 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}
+                style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+              >
               <div className="mb-8">
                 <Quote className="w-10 h-10 text-accent/30" strokeWidth={1.5} />
               </div>
@@ -55,7 +61,8 @@ const Testimonials = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
