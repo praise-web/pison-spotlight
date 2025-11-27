@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Loader2, LogOut } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
@@ -25,11 +26,19 @@ interface Order {
   extras: string[] | null;
 }
 
+interface UserRole {
+  id: string;
+  user_id: string;
+  role: string;
+  created_at: string;
+}
+
 const Admin = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [users, setUsers] = useState<UserRole[]>([]);
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
 
   useEffect(() => {
@@ -67,7 +76,7 @@ const Admin = () => {
       }
 
       setIsAdmin(true);
-      await loadOrders();
+      await Promise.all([loadOrders(), loadUsers()]);
     } catch (error) {
       console.error("Error checking admin access:", error);
       navigate("/login");
@@ -89,6 +98,22 @@ const Admin = () => {
     } catch (error: any) {
       toast.error("Failed to load orders");
       console.error("Error loading orders:", error);
+    }
+  };
+
+  const loadUsers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("user_roles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      setUsers(data || []);
+    } catch (error: any) {
+      toast.error("Failed to load users");
+      console.error("Error loading users:", error);
     }
   };
 
@@ -129,82 +154,125 @@ const Admin = () => {
           </Button>
         </div>
 
-        <Card 
-          className={`transition-all duration-700 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <CardHeader>
-            <CardTitle>All Orders ({orders.length})</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Phone</TableHead>
-                    <TableHead>CV Type</TableHead>
-                    <TableHead>Payment</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Details</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {orders.map((order) => (
-                    <TableRow key={order.id}>
-                      <TableCell>
-                        {new Date(order.created_at).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell className="font-medium">{order.full_name}</TableCell>
-                      <TableCell>{order.email}</TableCell>
-                      <TableCell>{order.phone_number}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{order.cv_type}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">{order.payment_option}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge 
-                          variant={order.status === "pending" ? "default" : "secondary"}
-                        >
-                          {order.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="text-sm space-y-1">
-                          {order.current_job_title && (
-                            <p className="text-muted-foreground">
-                              Job: {order.current_job_title}
-                            </p>
-                          )}
-                          {order.number_of_roles && (
-                            <p className="text-muted-foreground">
-                              Roles: {order.number_of_roles}
-                            </p>
-                          )}
-                          {order.rush_delivery && (
-                            <Badge variant="destructive" className="text-xs">
-                              Rush Delivery
+        <Tabs defaultValue="submissions" className={`transition-all duration-700 delay-200 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}>
+          <TabsList className="grid w-full grid-cols-2 max-w-md">
+            <TabsTrigger value="submissions">Submissions</TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="submissions">
+            <Card>
+              <CardHeader>
+                <CardTitle>All Submissions ({orders.length})</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Email</TableHead>
+                        <TableHead>Phone</TableHead>
+                        <TableHead>CV Type</TableHead>
+                        <TableHead>Payment</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Details</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {orders.map((order) => (
+                        <TableRow key={order.id}>
+                          <TableCell>
+                            {new Date(order.created_at).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell className="font-medium">{order.full_name}</TableCell>
+                          <TableCell>{order.email}</TableCell>
+                          <TableCell>{order.phone_number}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline">{order.cv_type}</Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary">{order.payment_option}</Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge 
+                              variant={order.status === "pending" ? "default" : "secondary"}
+                            >
+                              {order.status}
                             </Badge>
-                          )}
-                          {order.extras && order.extras.length > 0 && (
-                            <p className="text-muted-foreground text-xs">
-                              Extras: {order.extras.join(", ")}
-                            </p>
-                          )}
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
+                          </TableCell>
+                          <TableCell>
+                            <div className="text-sm space-y-1">
+                              {order.current_job_title && (
+                                <p className="text-muted-foreground">
+                                  Job: {order.current_job_title}
+                                </p>
+                              )}
+                              {order.number_of_roles && (
+                                <p className="text-muted-foreground">
+                                  Roles: {order.number_of_roles}
+                                </p>
+                              )}
+                              {order.rush_delivery && (
+                                <Badge variant="destructive" className="text-xs">
+                                  Rush Delivery
+                                </Badge>
+                              )}
+                              {order.extras && order.extras.length > 0 && (
+                                <p className="text-muted-foreground text-xs">
+                                  Extras: {order.extras.join(", ")}
+                                </p>
+                              )}
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="users">
+            <Card>
+              <CardHeader>
+                <CardTitle>All Users ({users.length})</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>User ID</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead>Created At</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {users.map((user) => (
+                        <TableRow key={user.id}>
+                          <TableCell className="font-mono text-sm">{user.user_id}</TableCell>
+                          <TableCell>
+                            <Badge variant={user.role === "admin" ? "default" : "secondary"}>
+                              {user.role}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            {new Date(user.created_at).toLocaleDateString()}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
