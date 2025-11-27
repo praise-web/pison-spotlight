@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Loader2, LogOut } from "lucide-react";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 interface Order {
   id: string;
@@ -39,7 +38,6 @@ const Admin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [users, setUsers] = useState<UserRole[]>([]);
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
 
   useEffect(() => {
     checkAdminAccess();
@@ -138,12 +136,7 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto">
-        <div 
-          ref={ref}
-          className={`flex justify-between items-center mb-8 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
+        <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold">Admin Dashboard</h1>
             <p className="text-muted-foreground mt-2">Manage submitted orders</p>
@@ -154,9 +147,7 @@ const Admin = () => {
           </Button>
         </div>
 
-        <Tabs defaultValue="submissions" className={`transition-all duration-700 delay-200 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}>
+        <Tabs defaultValue="submissions">
           <TabsList className="grid w-full grid-cols-2 max-w-md">
             <TabsTrigger value="submissions">Submissions</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
