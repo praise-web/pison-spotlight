@@ -53,7 +53,7 @@ const WaitlistCountdown = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("waitlist")
         .insert([{ email, name }]);
 
