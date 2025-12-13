@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link2, QrCode, Shield, FileCheck, Clock, Video, Layout, CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,42 @@ const features = [
 
 const WaitlistHero = () => {
   const navigate = useNavigate();
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const targetDate = new Date("2026-01-05T00:00:00");
+
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const timeBlocks = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
+  ];
   
   const scrollToWaitlist = () => {
     document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -40,11 +77,28 @@ const WaitlistHero = () => {
           </h1>
           
           {/* Subtext */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed font-light">
             The Pison Smart CV is more than a CV — it's a professional career tool built for the African job market. 
             Designed to get you noticed, verified, and hired, it combines expert crafting with smart technology 
             to showcase your achievements, credentials, and impact in the clearest, most compelling way possible.
           </p>
+          
+          {/* Countdown Timer */}
+          <div className="grid grid-cols-4 gap-3 mb-12 max-w-md mx-auto">
+            {timeBlocks.map((block, index) => (
+              <div
+                key={index}
+                className="glass-card p-3 rounded-xl border border-accent/30"
+              >
+                <div className="text-2xl md:text-3xl font-bold text-accent">
+                  {String(block.value).padStart(2, "0")}
+                </div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
+                  {block.label}
+                </div>
+              </div>
+            ))}
+          </div>
           
           {/* Feature Pills */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
