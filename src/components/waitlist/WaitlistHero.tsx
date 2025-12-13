@@ -79,8 +79,7 @@ const WaitlistHero = () => {
           {/* Subtext */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed font-light">
             The Pison Smart CV is more than a CV — it's a professional career tool built for the African job market. 
-            Designed to get you noticed, verified, and hired, it combines expert crafting with smart technology 
-            to showcase your achievements, credentials, and impact in the clearest, most compelling way possible.
+            Designed to get you noticed, verified, and hired.
           </p>
           
           {/* Countdown Timer */}
