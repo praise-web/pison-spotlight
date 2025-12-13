@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import SmartCVPage from "./pages/SmartCVPage";
+import SmartCVWaitlist from "./pages/SmartCVWaitlist";
 import OrderSmartCV from "./pages/OrderSmartCV";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/smart-cv" element={<SmartCVPage />} />
+          <Route path="/waitlist" element={<SmartCVWaitlist />} />
           <Route path="/order" element={<OrderSmartCV />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/login" element={<Login />} />
