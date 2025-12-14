@@ -1,12 +1,37 @@
 import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      // If not logged in and not already on waitlist, login, or admin pages, redirect to waitlist
+      const publicPaths = ['/waitlist', '/login', '/admin'];
+      if (!session && !publicPaths.includes(location.pathname)) {
+        navigate('/waitlist');
+      }
+    };
+
+    checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      const publicPaths = ['/waitlist', '/login', '/admin'];
+      if (!session && !publicPaths.includes(location.pathname)) {
+        navigate('/waitlist');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate, location.pathname]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border">
