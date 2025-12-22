@@ -25,6 +25,13 @@ interface Order {
   extras: string[] | null;
 }
 
+interface WaitlistEntry {
+  id: string;
+  name: string;
+  email: string;
+  created_at: string;
+}
+
 interface UserRole {
   id: string;
   user_id: string;
@@ -38,6 +45,7 @@ const Admin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [users, setUsers] = useState<UserRole[]>([]);
+  const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
 
   useEffect(() => {
     checkAdminAccess();
@@ -74,7 +82,7 @@ const Admin = () => {
       }
 
       setIsAdmin(true);
-      await Promise.all([loadOrders(), loadUsers()]);
+      await Promise.all([loadOrders(), loadUsers(), loadWaitlist()]);
     } catch (error) {
       console.error("Error checking admin access:", error);
       navigate("/login");
@@ -115,6 +123,22 @@ const Admin = () => {
     }
   };
 
+  const loadWaitlist = async () => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from("waitlist")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      setWaitlist(data || []);
+    } catch (error: any) {
+      toast.error("Failed to load waitlist");
+      console.error("Error loading waitlist:", error);
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     toast.success("Signed out successfully");
@@ -148,8 +172,9 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="submissions">
-          <TabsList className="grid w-full grid-cols-2 max-w-md">
+          <TabsList className="grid w-full grid-cols-3 max-w-lg">
             <TabsTrigger value="submissions">Submissions</TabsTrigger>
+            <TabsTrigger value="waitlist">Waitlist</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
           </TabsList>
           
@@ -219,6 +244,38 @@ const Admin = () => {
                               )}
                             </div>
                           </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="waitlist">
+            <Card>
+              <CardHeader>
+                <CardTitle>Waitlist Entries ({waitlist.length})</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Email</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {waitlist.map((entry) => (
+                        <TableRow key={entry.id}>
+                          <TableCell>
+                            {new Date(entry.created_at).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell className="font-medium">{entry.name}</TableCell>
+                          <TableCell>{entry.email}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
