@@ -141,7 +141,7 @@ const WaitlistCountdown = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-medium py-6 rounded-full"
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-medium py-4 sm:py-6 rounded-full whitespace-normal h-auto text-sm sm:text-base"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Joining..." : "🔥 Join the Smart CV Wait-list Now"}

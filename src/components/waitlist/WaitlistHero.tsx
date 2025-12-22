@@ -125,7 +125,7 @@ const WaitlistHero = () => {
             <Button
               size="lg"
               variant="outline"
-              className="font-medium px-10 py-7 text-base rounded-full border-2 border-accent/50 text-accent hover:bg-accent/10"
+              className="font-medium px-6 sm:px-10 py-4 sm:py-7 text-sm sm:text-base rounded-full border-2 border-accent/50 text-accent hover:bg-accent/10 whitespace-normal h-auto text-center"
               onClick={scrollToWaitlist}
             >
               🔥 Join the Wait-list & Unlock Early Bird Discounts
