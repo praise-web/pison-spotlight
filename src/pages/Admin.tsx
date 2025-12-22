@@ -41,6 +41,7 @@ interface UserRole {
   user_id: string;
   role: string;
   created_at: string;
+  email?: string;
 }
 
 const Admin = () => {
@@ -123,7 +124,21 @@ const Admin = () => {
 
       if (error) throw error;
 
-      setUsers(data || []);
+      // Fetch emails for all users
+      const userIds = (data || []).map((u) => u.user_id);
+      if (userIds.length > 0) {
+        const { data: emailData } = await supabase.functions.invoke("get-user-emails", {
+          body: { userIds },
+        });
+
+        const usersWithEmails = (data || []).map((user) => ({
+          ...user,
+          email: emailData?.userEmails?.[user.user_id] || "N/A",
+        }));
+        setUsers(usersWithEmails);
+      } else {
+        setUsers([]);
+      }
     } catch (error: any) {
       toast.error("Failed to load users");
       console.error("Error loading users:", error);
@@ -390,6 +405,7 @@ const Admin = () => {
                     <TableHeader>
                       <TableRow>
                         <TableHead>User ID</TableHead>
+                        <TableHead>Email</TableHead>
                         <TableHead>Role</TableHead>
                         <TableHead>Created At</TableHead>
                       </TableRow>
@@ -398,6 +414,7 @@ const Admin = () => {
                       {users.map((user) => (
                         <TableRow key={user.id}>
                           <TableCell className="font-mono text-sm">{user.user_id}</TableCell>
+                          <TableCell>{user.email || "N/A"}</TableCell>
                           <TableCell>
                             <Badge variant={user.role === "admin" ? "default" : "secondary"}>
                               {user.role}
