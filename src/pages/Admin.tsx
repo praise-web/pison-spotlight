@@ -200,6 +200,7 @@ const Admin = () => {
           rushDelivery: order.rush_delivery,
           extras: order.extras,
           resendOnly: true,
+          orderId: order.id,
         },
       });
 

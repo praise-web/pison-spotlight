@@ -20,12 +20,14 @@ interface OrderRequest {
   cvType: string;
   extras: string[];
   cvFileUrl?: string;
-  verificationHosting: string;
-  additionalDocsUrls: string[];
+  verificationHosting?: string;
+  additionalDocsUrls?: string[];
   paymentOption: string;
   rushDelivery: boolean;
   discountCode?: string;
   specialInstructions?: string;
+  resendOnly?: boolean;
+  orderId?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -41,33 +43,63 @@ const handler = async (req: Request): Promise<Response> => {
     // Initialize Supabase client
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Store order in database
-    const { data: order, error: dbError } = await supabase
-      .from('orders')
-      .insert({
-        full_name: orderData.fullName,
-        phone_number: orderData.phoneNumber,
-        email: orderData.email,
-        linkedin_profile: orderData.linkedinProfile,
-        current_job_title: orderData.currentJobTitle,
-        number_of_roles: orderData.numberOfRoles,
-        cv_type: orderData.cvType,
-        extras: orderData.extras,
-        cv_file_url: orderData.cvFileUrl,
-        verification_hosting: orderData.verificationHosting,
-        additional_docs_urls: orderData.additionalDocsUrls,
-        payment_option: orderData.paymentOption,
-        rush_delivery: orderData.rushDelivery,
-        discount_code: orderData.discountCode,
-        special_instructions: orderData.specialInstructions,
-        status: 'pending'
-      })
-      .select()
-      .single();
+    let order: any;
 
-    if (dbError) {
-      console.error('Database error:', dbError);
-      throw new Error(`Failed to store order: ${dbError.message}`);
+    // If resendOnly is true, fetch existing order instead of creating new one
+    if (orderData.resendOnly && orderData.orderId) {
+      console.log('Resending email for existing order:', orderData.orderId);
+      const { data: existingOrder, error: fetchError } = await supabase
+        .from('orders')
+        .select()
+        .eq('id', orderData.orderId)
+        .single();
+
+      if (fetchError) {
+        console.error('Error fetching order:', fetchError);
+        throw new Error(`Failed to fetch order: ${fetchError.message}`);
+      }
+
+      order = existingOrder;
+      // Map database fields to orderData for email template
+      orderData.verificationHosting = existingOrder.verification_hosting;
+      orderData.additionalDocsUrls = existingOrder.additional_docs_urls || [];
+      orderData.extras = existingOrder.extras || [];
+      orderData.cvFileUrl = existingOrder.cv_file_url;
+      orderData.discountCode = existingOrder.discount_code;
+      orderData.specialInstructions = existingOrder.special_instructions;
+      orderData.linkedinProfile = existingOrder.linkedin_profile;
+      orderData.numberOfRoles = existingOrder.number_of_roles;
+    } else {
+      // Store order in database
+      const { data: newOrder, error: dbError } = await supabase
+        .from('orders')
+        .insert({
+          full_name: orderData.fullName,
+          phone_number: orderData.phoneNumber,
+          email: orderData.email,
+          linkedin_profile: orderData.linkedinProfile,
+          current_job_title: orderData.currentJobTitle,
+          number_of_roles: orderData.numberOfRoles,
+          cv_type: orderData.cvType,
+          extras: orderData.extras || [],
+          cv_file_url: orderData.cvFileUrl,
+          verification_hosting: orderData.verificationHosting,
+          additional_docs_urls: orderData.additionalDocsUrls || [],
+          payment_option: orderData.paymentOption,
+          rush_delivery: orderData.rushDelivery,
+          discount_code: orderData.discountCode,
+          special_instructions: orderData.specialInstructions,
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        throw new Error(`Failed to store order: ${dbError.message}`);
+      }
+
+      order = newOrder;
     }
 
     console.log('Order stored successfully:', order.id);
@@ -196,7 +228,7 @@ const handler = async (req: Request): Promise<Response> => {
             <p><a href="${orderData.cvFileUrl}">Download CV</a></p>
           ` : ''}
           
-          ${orderData.additionalDocsUrls.length > 0 ? `
+          ${(orderData.additionalDocsUrls && orderData.additionalDocsUrls.length > 0) ? `
             <h2>Additional Documents</h2>
             <ul>
               ${orderData.additionalDocsUrls.map((url, i) => `<li><a href="${url}">Document ${i + 1}</a></li>`).join('')}
