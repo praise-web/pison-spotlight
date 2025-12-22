@@ -141,7 +141,7 @@ const WaitlistCountdown = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-medium py-4 sm:py-6 rounded-full whitespace-normal h-auto text-sm sm:text-base"
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-medium py-6 rounded-full whitespace-normal h-auto text-sm sm:text-base"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Joining..." : "🔥 Join the Smart CV Wait-list Now"}
@@ -153,7 +153,7 @@ const WaitlistCountdown = () => {
           <Button
             size="lg"
             variant="outline"
-            className="font-medium px-10 py-7 text-base rounded-full border-2 border-accent/50 text-accent hover:bg-accent/10"
+            className="font-medium px-6 sm:px-10 py-6 text-sm sm:text-base rounded-full border-2 border-accent/50 text-accent hover:bg-accent/10 whitespace-normal h-auto text-center"
             onClick={() => navigate('/order')}
           >
             <FileCheck className="mr-2 h-5 w-5" />
