@@ -9,20 +9,39 @@ import WaitlistHowItWorks from "@/components/waitlist/WaitlistHowItWorks";
 import WaitlistFAQ from "@/components/waitlist/WaitlistFAQ";
 import WaitlistTestimonials from "@/components/waitlist/WaitlistTestimonials";
 import WaitlistCountdown from "@/components/waitlist/WaitlistCountdown";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const SmartCVWaitlist = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <WaitlistHero />
-      <WaitlistIncentives />
-      <WaitlistAbout />
-      <WaitlistWhyChoose />
-      <WaitlistServices />
-      <WaitlistHowItWorks />
-      <WaitlistFAQ />
-      <WaitlistTestimonials />
-      <WaitlistCountdown />
+      <AnimatedSection>
+        <WaitlistHero />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistIncentives />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistAbout />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistWhyChoose />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistServices />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistHowItWorks />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistFAQ />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistTestimonials />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WaitlistCountdown />
+      </AnimatedSection>
       <Footer />
     </div>
   );
