@@ -114,7 +114,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to customer
     const customerEmailResponse = await sendEmail({
-      from: "Pison Careers <onboarding@resend.dev>",
+      from: "Pison Careers <emails@thepisongroup.com>",
       to: [orderData.email],
       subject: "🎉 Order Received - Pison Smart CV",
       html: `
@@ -158,8 +158,8 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to internal team
     const internalEmailResponse = await sendEmail({
-      from: "Pison Orders <onboarding@resend.dev>",
-      to: ["admin@praiseoyedele.com.ng"],
+      from: "Pison Orders <emails@thepisongroup.com>",
+      to: ["admin@thepisongroup.com"],
       subject: `New Smart CV Order - ${orderData.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
