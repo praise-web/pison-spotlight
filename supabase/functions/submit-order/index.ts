@@ -120,7 +120,7 @@ const handler = async (req: Request): Promise<Response> => {
       : '';
 
     // Helper to send emails via Resend HTTP API
-    const sendEmail = async (payload: { from: string; to: string[]; subject: string; html: string }) => {
+    const sendEmail = async (payload: { from: string; to: string[]; subject: string; html: string; reply_to?: string }) => {
       if (!RESEND_API_KEY) {
         console.error("RESEND_API_KEY is not set");
         return { error: "Missing RESEND_API_KEY" };
@@ -148,6 +148,7 @@ const handler = async (req: Request): Promise<Response> => {
     const customerEmailResponse = await sendEmail({
       from: "Pison Careers <emails@thepisongroup.com>",
       to: [orderData.email],
+      reply_to: "admin@thepisongroup.com",
       subject: "🎉 Order Received - Pison Smart CV",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
