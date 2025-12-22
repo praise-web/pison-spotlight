@@ -76,7 +76,7 @@ const WaitlistIncentives = () => {
         <div className="text-center">
           <Button
             size="lg"
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-6 sm:px-10 py-4 sm:py-7 text-sm sm:text-base rounded-full whitespace-normal h-auto text-center"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-6 sm:px-10 py-6 text-sm sm:text-base rounded-full whitespace-normal h-auto text-center"
             onClick={scrollToWaitlist}
           >
             🚀 Join the Smart CV Wait-list Today — Limited Spots!

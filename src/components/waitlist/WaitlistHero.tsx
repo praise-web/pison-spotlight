@@ -116,7 +116,7 @@ const WaitlistHero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-10 py-7 text-base rounded-full border-2 border-accent"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium px-6 sm:px-10 py-6 text-sm sm:text-base rounded-full border-2 border-accent whitespace-normal h-auto text-center"
               onClick={() => navigate('/order')}
             >
               <FileCheck className="mr-2 h-5 w-5" />
@@ -125,7 +125,7 @@ const WaitlistHero = () => {
             <Button
               size="lg"
               variant="outline"
-              className="font-medium px-6 sm:px-10 py-4 sm:py-7 text-sm sm:text-base rounded-full border-2 border-accent/50 text-accent hover:bg-accent/10 whitespace-normal h-auto text-center"
+              className="font-medium px-6 sm:px-10 py-6 text-sm sm:text-base rounded-full border-2 border-accent/50 text-accent hover:bg-accent/10 whitespace-normal h-auto text-center"
               onClick={scrollToWaitlist}
             >
               🔥 Join the Wait-list & Unlock Early Bird Discounts
