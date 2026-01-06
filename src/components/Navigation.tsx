@@ -10,28 +10,28 @@ const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+  //useEffect(() => {
+    //const checkAuth = async () => {
+      //const { data: { session } } = await supabase.auth.getSession();
       
       // If not logged in and not already on waitlist, login, or admin pages, redirect to waitlist
-      const publicPaths = ['/waitlist', '/login', '/admin'];
-      if (!session && !publicPaths.includes(location.pathname)) {
-        navigate('/waitlist');
-      }
-    };
+      //const publicPaths = ['/waitlist', '/login', '/admin'];
+      //if (!session && !publicPaths.includes(location.pathname)) {
+        //navigate('/waitlist');
+      //}
+    //};
 
-    checkAuth();
+    //checkAuth();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      const publicPaths = ['/waitlist', '/login', '/admin'];
-      if (!session && !publicPaths.includes(location.pathname)) {
-        navigate('/waitlist');
-      }
-    });
+    //const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      //const publicPaths = ['/waitlist', '/login', '/admin'];
+      //if (!session && !publicPaths.includes(location.pathname)) {
+        //navigate('/waitlist');
+      //}
+    //});
 
-    return () => subscription.unsubscribe();
-  }, [navigate, location.pathname]);
+    //return () => subscription.unsubscribe();
+  //}, [navigate, location.pathname]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border">
