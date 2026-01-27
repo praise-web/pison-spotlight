@@ -3,6 +3,7 @@ import { MessageCircle, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import slide0 from "@/assets/smart-cv-slide-0.jpeg";
 import slide1 from "@/assets/smart-cv-slide-1.jpeg";
 import slide2 from "@/assets/smart-cv-slide-2.jpeg";
 import slide3 from "@/assets/smart-cv-slide-3.jpeg";
@@ -11,7 +12,7 @@ import slide5 from "@/assets/smart-cv-slide-5.jpeg";
 import slide6 from "@/assets/smart-cv-slide-6.jpeg";
 import slide7 from "@/assets/smart-cv-slide-7.jpeg";
 
-const slides = [slide1, slide2, slide3, slide4, slide5, slide6, slide7];
+const slides = [slide0, slide1, slide2, slide3, slide4, slide5, slide6, slide7];
 
 
 const Hero = () => {
