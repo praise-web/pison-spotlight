@@ -454,9 +454,9 @@ const OrderSmartCV = () => {
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="bank-transfer">Bank Transfer</SelectItem>
-                            <SelectItem value="card">Card (Secure Gateway)</SelectItem>
-                            <SelectItem value="flutterwave">Flutterwave/Paystack</SelectItem>
-                            <SelectItem value="paypal">PayPal (International)</SelectItem>
+                            <SelectItem value="card" disabled>Card (Secure Gateway) - Coming Soon</SelectItem>
+                            <SelectItem value="flutterwave" disabled>Flutterwave/Paystack - Coming Soon</SelectItem>
+                            <SelectItem value="paypal" disabled>PayPal (International) - Coming Soon</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
