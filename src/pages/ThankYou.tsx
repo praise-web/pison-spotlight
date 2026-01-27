@@ -1,11 +1,21 @@
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { CheckCircle, Clock, Mail, Share2, Home, Phone } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { CheckCircle, Clock, Mail, Share2, Home, MessageCircle } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const ThankYou = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { orderId, fullName } = (location.state as { orderId?: string; fullName?: string }) || {};
   const { ref: pageRef, isVisible: pageVisible } = useIntersectionObserver();
+
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "2348123911469"; // Nigerian format without leading 0
+    const message = encodeURIComponent(
+      `Hello Pison Careers! I just placed an order for Smart CV.\n\nOrder ID: ${orderId || 'N/A'}\nName: ${fullName || 'N/A'}\n\nI'd like to continue with my order.`
+    );
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+  };
 
   return (
     <div ref={pageRef} className={`min-h-screen bg-background flex items-center justify-center px-6 py-12 transition-all duration-700 ${pageVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'}`}>
@@ -37,6 +47,29 @@ const ThankYou = () => {
           <p className="text-muted-foreground text-lg">
             Your request for the Pison Smart CV has been successfully submitted.
           </p>
+          {orderId && (
+            <p className="text-sm text-muted-foreground mt-2">
+              Order ID: <span className="font-mono text-foreground">{orderId}</span>
+            </p>
+          )}
+        </div>
+
+        {/* WhatsApp CTA */}
+        <div className="bg-gradient-to-r from-green-600/20 to-green-500/10 backdrop-blur-sm border border-green-500/30 rounded-lg p-6 mb-8 text-center">
+          <MessageCircle className="w-10 h-10 text-green-500 mx-auto mb-3" />
+          <h3 className="text-lg font-semibold text-foreground mb-2">
+            Continue Your Order on WhatsApp
+          </h3>
+          <p className="text-muted-foreground mb-4">
+            Chat with us directly to complete your payment and get updates on your Smart CV.
+          </p>
+          <Button
+            onClick={handleWhatsAppClick}
+            className="gap-2 bg-green-600 hover:bg-green-700 text-white"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Continue on WhatsApp
+          </Button>
         </div>
 
         {/* Next Steps Card */}
@@ -136,11 +169,11 @@ const ThankYou = () => {
           </Button>
           <Button
             variant="outline"
-            onClick={() => window.open("https://wa.me/YOUR_NUMBER", "_blank")}
-            className="gap-2 border-gold/50 hover:bg-gold/10"
+            onClick={handleWhatsAppClick}
+            className="gap-2 border-green-500/50 hover:bg-green-500/10 text-green-600"
           >
-            <Phone className="w-4 h-4" />
-            Contact Us
+            <MessageCircle className="w-4 h-4" />
+            Contact on WhatsApp
           </Button>
         </div>
       </div>

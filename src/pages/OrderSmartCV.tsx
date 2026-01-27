@@ -103,7 +103,7 @@ const OrderSmartCV = () => {
       });
       
       setTimeout(() => {
-        navigate("/thank-you");
+        navigate("/thank-you", { state: { orderId: result.orderId, fullName: data.fullName } });
       }, 1500);
     } catch (error) {
       console.error('Order submission error:', error);
