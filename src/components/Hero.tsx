@@ -1,7 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Mail } from "lucide-react";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import slide1 from "@/assets/smart-cv-slide-1.jpeg";
+import slide2 from "@/assets/smart-cv-slide-2.jpeg";
+import slide3 from "@/assets/smart-cv-slide-3.jpeg";
+import slide4 from "@/assets/smart-cv-slide-4.jpeg";
+import slide5 from "@/assets/smart-cv-slide-5.jpeg";
+import slide6 from "@/assets/smart-cv-slide-6.jpeg";
+import slide7 from "@/assets/smart-cv-slide-7.jpeg";
+
+const slides = [slide1, slide2, slide3, slide4, slide5, slide6, slide7];
 
 
 const Hero = () => {
@@ -59,20 +69,57 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Side - Lottie Animation */}
+          {/* Right Side - Image Slider */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="relative w-full max-w-xl lg:max-w-3xl h-[500px] lg:h-[700px]">
-              <DotLottieReact
-                src="https://lottie.host/81a2a9e0-0516-4cc5-9e49-694b6224dd86/SLCEy57Zb7.lottie"
-                loop
-                autoplay
-                className="w-full h-full drop-shadow-2xl"
-              />
-            </div>
+            <HeroSlider />
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+const HeroSlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-full max-w-xl lg:max-w-2xl">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-xl">
+        {slides.map((slide, index) => (
+          <img
+            key={index}
+            src={slide}
+            alt={`Smart CV Feature ${index + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
+      </div>
+      
+      {/* Dots indicator */}
+      <div className="flex justify-center gap-2 mt-4">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              index === currentSlide 
+                ? 'bg-accent w-6' 
+                : 'bg-muted-foreground/40 hover:bg-muted-foreground/60'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
